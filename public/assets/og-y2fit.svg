@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#070809"/>
+  <path d="M0 500C210 420 390 560 600 455s410-30 600-130v305H0z" fill="#c8f82e" opacity=".13"/>
+  <text x="90" y="175" font-family="Arial Black, Arial, sans-serif" font-size="96" font-weight="900" fill="#f4f7ef">y<tspan fill="#c8f82e">2</tspan>fit</text>
+  <text x="92" y="245" font-family="Arial, sans-serif" font-size="25" fill="#8c9487" letter-spacing="7">ENTRENA COMO SI FUERA TU SERIE</text>
+  <text x="90" y="370" font-family="Arial Black, Arial, sans-serif" font-size="70" font-weight="900" fill="#f4f7ef">DEL EQUIPO AL GYM</text>
+  <text x="90" y="450" font-family="Arial Black, Arial, sans-serif" font-size="70" font-weight="900" fill="#c8f82e">SIN PERDER EL RITMO</text>
+  <rect x="805" y="92" width="260" height="446" rx="48" fill="#202620"/>
+  <rect x="821" y="110" width="228" height="410" rx="34" fill="#090a0b"/>
+  <rect x="855" y="178" width="160" height="128" rx="22" fill="#c8f82e"/>
+  <text x="877" y="235" font-family="Arial Black, Arial, sans-serif" font-size="36" fill="#070809">EP.04</text>
+  <text x="877" y="277" font-family="Arial Black, Arial, sans-serif" font-size="36" fill="#070809">PUSH</text>
+  <rect x="855" y="340" width="160" height="42" rx="13" fill="#171b1d"/>
+  <rect x="855" y="400" width="160" height="42" rx="13" fill="#f4f7ef"/>
+</svg>

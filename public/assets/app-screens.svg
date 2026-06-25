@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
+  <title id="title">Capturas placeholder Y2FIT</title>
+  <desc id="desc">Tres pantallas de la app Y2FIT sobre fondo oscuro.</desc>
+  <rect width="1200" height="760" fill="#08090a"/>
+  <path d="M0 620C250 520 412 640 600 540s344-14 600-118v338H0z" fill="#c8f82e" opacity=".08"/>
+  <g transform="translate(120 70) rotate(-7 150 300)">
+    <rect width="300" height="600" rx="42" fill="#1c2020"/>
+    <rect x="16" y="18" width="268" height="564" rx="32" fill="#070809"/>
+    <text x="150" y="82" font-family="Arial Black, Arial, sans-serif" font-size="32" text-anchor="middle" fill="#f4f7ef">y<tspan fill="#c8f82e">2</tspan>fit</text>
+    <rect x="42" y="130" width="216" height="148" rx="22" fill="#c8f82e"/>
+    <text x="64" y="182" font-family="Arial Black, Arial, sans-serif" font-size="30" fill="#070809">ONBOARD</text>
+    <text x="64" y="220" font-family="Arial, sans-serif" font-size="16" font-weight="700" fill="#070809">Deporte previo: basket</text>
+    <rect x="42" y="318" width="216" height="56" rx="16" fill="#15191a"/>
+    <rect x="42" y="392" width="216" height="56" rx="16" fill="#15191a"/>
+    <rect x="42" y="466" width="216" height="56" rx="16" fill="#f4f7ef"/>
+  </g>
+  <g transform="translate(450 45)">
+    <rect width="300" height="640" rx="42" fill="#252b24"/>
+    <rect x="16" y="18" width="268" height="604" rx="32" fill="#090a0b"/>
+    <text x="150" y="82" font-family="Arial Black, Arial, sans-serif" font-size="28" text-anchor="middle" fill="#f4f7ef">EPISODIO 04</text>
+    <rect x="42" y="122" width="216" height="216" rx="30" fill="#c8f82e"/>
+    <text x="70" y="192" font-family="Arial Black, Arial, sans-serif" font-size="42" fill="#070809">PUSH</text>
+    <text x="70" y="242" font-family="Arial Black, Arial, sans-serif" font-size="42" fill="#070809">DAY</text>
+    <circle cx="208" cy="268" r="30" fill="#070809"/>
+    <path d="M195 268l9 10 18-22" fill="none" stroke="#c8f82e" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="42" y="374" width="216" height="54" rx="15" fill="#171b1d"/>
+    <rect x="42" y="444" width="216" height="54" rx="15" fill="#171b1d"/>
+    <rect x="42" y="514" width="216" height="54" rx="15" fill="#c8f82e"/>
+  </g>
+  <g transform="translate(780 95) rotate(7 150 300)">
+    <rect width="300" height="600" rx="42" fill="#1c2020"/>
+    <rect x="16" y="18" width="268" height="564" rx="32" fill="#070809"/>
+    <text x="150" y="82" font-family="Arial Black, Arial, sans-serif" font-size="28" text-anchor="middle" fill="#f4f7ef">PROGRESO</text>
+    <circle cx="150" cy="210" r="86" fill="none" stroke="#222823" stroke-width="22"/>
+    <path d="M150 124a86 86 0 1 1-71 135" fill="none" stroke="#c8f82e" stroke-width="22" stroke-linecap="round"/>
+    <text x="150" y="220" font-family="Arial Black, Arial, sans-serif" font-size="42" text-anchor="middle" fill="#f4f7ef">68%</text>
+    <rect x="42" y="344" width="216" height="54" rx="15" fill="#15191a"/>
+    <rect x="42" y="414" width="216" height="54" rx="15" fill="#15191a"/>
+    <rect x="42" y="484" width="216" height="54" rx="15" fill="#c8f82e"/>
+  </g>
+</svg>

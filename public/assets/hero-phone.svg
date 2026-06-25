@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="920" viewBox="0 0 760 920" role="img" aria-labelledby="title desc">
+  <title id="title">Mockup movil Y2FIT</title>
+  <desc id="desc">Telefono con interfaz oscura deportiva de Y2FIT.</desc>
+  <defs>
+    <linearGradient id="shell" x1="95" y1="80" x2="665" y2="840" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#252a25"/>
+      <stop offset=".45" stop-color="#0c0e0f"/>
+      <stop offset="1" stop-color="#2d3327"/>
+    </linearGradient>
+    <linearGradient id="screen" x1="162" y1="118" x2="598" y2="810" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#141719"/>
+      <stop offset="1" stop-color="#050606"/>
+    </linearGradient>
+    <filter id="shadow" x="0" y="0" width="760" height="920" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="34" stdDeviation="38" flood-color="#000" flood-opacity=".55"/>
+      <feDropShadow dx="0" dy="0" stdDeviation="34" flood-color="#c8f82e" flood-opacity=".22"/>
+    </filter>
+  </defs>
+  <g filter="url(#shadow)" transform="rotate(-5 380 460)">
+    <rect x="147" y="70" width="466" height="780" rx="68" fill="url(#shell)"/>
+    <rect x="166" y="90" width="428" height="740" rx="50" fill="#050606"/>
+    <rect x="184" y="112" width="392" height="696" rx="38" fill="url(#screen)"/>
+    <rect x="317" y="105" width="126" height="22" rx="11" fill="#050606"/>
+    <text x="380" y="174" font-family="Arial Black, Arial, sans-serif" font-size="42" font-weight="900" text-anchor="middle" fill="#f4f7ef">y<tspan fill="#c8f82e">2</tspan>fit</text>
+    <text x="380" y="202" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#8c9487" letter-spacing="3">TEMPORADA 01</text>
+    <rect x="220" y="236" width="320" height="148" rx="22" fill="#c8f82e"/>
+    <text x="246" y="286" font-family="Arial Black, Arial, sans-serif" font-size="28" font-weight="900" fill="#070809">EP. 04</text>
+    <text x="246" y="323" font-family="Arial Black, Arial, sans-serif" font-size="34" font-weight="900" fill="#070809">PUSH DAY</text>
+    <rect x="246" y="346" width="142" height="14" rx="7" fill="#070809" opacity=".2"/>
+    <rect x="246" y="346" width="98" height="14" rx="7" fill="#070809"/>
+    <circle cx="492" cy="310" r="40" fill="#070809"/>
+    <path d="M476 310l12 13 26-31" fill="none" stroke="#c8f82e" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+    <g fill="#111416" stroke="#262d24" stroke-width="2">
+      <rect x="220" y="414" width="320" height="74" rx="18"/>
+      <rect x="220" y="504" width="320" height="74" rx="18"/>
+      <rect x="220" y="594" width="320" height="74" rx="18"/>
+    </g>
+    <g font-family="Arial, sans-serif" font-size="16" font-weight="700" fill="#f4f7ef">
+      <text x="248" y="445">Press banca</text>
+      <text x="248" y="535">Fondos asistidos</text>
+      <text x="248" y="625">Hombro + core</text>
+    </g>
+    <g font-family="Arial Black, Arial, sans-serif" font-size="16" font-weight="900" fill="#c8f82e">
+      <text x="462" y="445">4x8</text>
+      <text x="462" y="535">3x10</text>
+      <text x="462" y="625">12 min</text>
+    </g>
+    <rect x="220" y="704" width="320" height="58" rx="16" fill="#f4f7ef"/>
+    <text x="380" y="740" font-family="Arial Black, Arial, sans-serif" font-size="16" font-weight="900" text-anchor="middle" fill="#070809">COMPLETAR EPISODIO</text>
+  </g>
+</svg>
