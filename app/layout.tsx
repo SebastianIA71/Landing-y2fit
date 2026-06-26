@@ -11,7 +11,8 @@ const inter = Inter({
 const archivo = Archivo({
   subsets: ["latin"],
   variable: "--font-display",
-  display: "swap"
+  display: "swap",
+  axes: ["wdth"]
 });
 
 export const metadata: Metadata = {
