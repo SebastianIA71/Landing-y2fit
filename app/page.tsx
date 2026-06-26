@@ -831,7 +831,7 @@ export default function Home() {
                   className="mb-[22px] font-display font-black leading-[.8]"
                   style={{ fontSize: 56, color: featured ? "#c8f82e" : "rgba(200,248,46,.3)" }}
                 >
-                  "
+                  &ldquo;
                 </div>
                 <p className="m-0 mb-7 text-[15px] leading-[1.72] text-[#cfd3cc]">{quote}</p>
                 <footer className="flex items-center gap-3">
