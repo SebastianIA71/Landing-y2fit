@@ -1,25 +1,13 @@
 "use client";
 
 import Image from "next/image";
-import { useRef } from "react";
-import {
-  motion,
-  useMotionValueEvent,
-  useScroll,
-  useTransform,
-  type MotionValue
-} from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+import { animate, useInView } from "framer-motion";
 import { PhoneDevice } from "@/components/PhoneFrame";
 import { usePrefersReducedMotion } from "@/lib/usePrefersReducedMotion";
 
 const TIMES = [19 * 60 + 4, 19 * 60 + 6, 19 * 60 + 38, 19 * 60 + 41];
-
-const CROSSFADE_STOPS: [number[], number[]][] = [
-  [[0, 1 / 3, 1], [1, 0, 0]],
-  [[0, 1 / 3, 2 / 3, 1], [0, 1, 0, 0]],
-  [[0, 1 / 3, 2 / 3, 1], [0, 0, 1, 0]],
-  [[0, 2 / 3, 1], [0, 0, 1]]
-];
+const STEP_MS = 2400;
 
 const SUBTITLES = [
   { time: "19:04", text: "Abres la app. Tu episodio de hoy te espera." },
@@ -34,13 +22,33 @@ function formatClock(minuteOfDay: number) {
   return `${h}:${String(m).padStart(2, "0")}`;
 }
 
-function Clock({ progress }: { progress: MotionValue<number> }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const minute = useTransform(progress, [0, 1 / 3, 2 / 3, 1], TIMES);
+function useAutoplaySequence(length: number, active: boolean) {
+  const [index, setIndex] = useState(0);
+  useEffect(() => {
+    if (!active || index >= length - 1) return;
+    const timer = setTimeout(() => setIndex((i) => i + 1), STEP_MS);
+    return () => clearTimeout(timer);
+  }, [active, index, length]);
+  return index;
+}
 
-  useMotionValueEvent(minute, "change", (v) => {
-    if (ref.current) ref.current.textContent = formatClock(v);
-  });
+function Clock({ index }: { index: number }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const prevIndex = useRef(0);
+
+  useEffect(() => {
+    const from = TIMES[prevIndex.current];
+    const to = TIMES[index];
+    prevIndex.current = index;
+    const controls = animate(from, to, {
+      duration: STEP_MS / 1000,
+      ease: "easeInOut",
+      onUpdate: (v) => {
+        if (ref.current) ref.current.textContent = formatClock(v);
+      }
+    });
+    return () => controls.stop();
+  }, [index]);
 
   return (
     <div ref={ref} className="font-display text-[clamp(48px,5vw,84px)] leading-none text-fog">
@@ -49,21 +57,11 @@ function Clock({ progress }: { progress: MotionValue<number> }) {
   );
 }
 
-function Screen({
-  progress,
-  index,
-  children
-}: {
-  progress: MotionValue<number>;
-  index: number;
-  children: React.ReactNode;
-}) {
-  const [input, output] = CROSSFADE_STOPS[index];
-  const opacity = useTransform(progress, input, output);
+function Frame({ active, children }: { active: boolean; children: React.ReactNode }) {
   return (
-    <motion.div style={{ opacity }} className="absolute inset-0">
+    <div className={"absolute inset-0 transition-opacity duration-700 " + (active ? "opacity-100" : "pointer-events-none opacity-0")}>
       {children}
-    </motion.div>
+    </div>
   );
 }
 
@@ -197,66 +195,48 @@ function CheckIn() {
   );
 }
 
-function DemoScrub() {
-  const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end end"] });
+function DemoAutoplay() {
+  const wrapRef = useRef<HTMLDivElement>(null);
+  const inView = useInView(wrapRef, { amount: 0.5, once: true });
+  const index = useAutoplaySequence(4, inView);
 
   return (
-    <section ref={ref} className="relative h-[420vh] bg-ink">
-      <div className="sticky top-0 grid h-screen grid-cols-1 items-center gap-8 overflow-hidden px-6 md:grid-cols-[1fr_auto_1fr] md:px-10">
+    <section ref={wrapRef} className="relative bg-ink py-24">
+      <div className="mx-auto grid min-h-[80vh] max-w-[1400px] grid-cols-1 items-center gap-8 px-6 md:grid-cols-[1fr_auto_1fr] md:px-10">
         <div className="hidden flex-col gap-2 justify-self-end text-right md:flex">
           <p className="font-display text-[13px] uppercase tracking-[0.12em] text-volt">EP.12 — Empuje</p>
-          <Clock progress={scrollYProgress} />
-          <p className="text-[13px] text-dim">Una sesión real, contada por tu scroll.</p>
+          <Clock index={index} />
+          <p className="text-[13px] text-dim">Una sesión real, en directo.</p>
         </div>
 
         <PhoneDevice className="mx-auto h-[700px] w-[330px]">
-          <Screen progress={scrollYProgress} index={0}>
+          <Frame active={index === 0}>
             <HomeToday />
-          </Screen>
-          <Screen progress={scrollYProgress} index={1}>
+          </Frame>
+          <Frame active={index === 1}>
             <EpisodeFrame done={false} />
-          </Screen>
-          <Screen progress={scrollYProgress} index={2}>
+          </Frame>
+          <Frame active={index === 2}>
             <EpisodeFrame done />
-          </Screen>
-          <Screen progress={scrollYProgress} index={3}>
+          </Frame>
+          <Frame active={index === 3}>
             <CheckIn />
-          </Screen>
+          </Frame>
         </PhoneDevice>
 
         <div className="relative hidden h-[140px] w-full max-w-[340px] self-center justify-self-start md:block">
-          {SUBTITLES.map((s, i) => {
-            const [input, output] = CROSSFADE_STOPS[i];
-            return (
-              <SubtitleFrame key={i} progress={scrollYProgress} input={input} output={output} time={s.time} text={s.text} />
-            );
-          })}
+          {SUBTITLES.map((s, i) => (
+            <div
+              key={i}
+              className={"absolute inset-0 transition-opacity duration-700 " + (index === i ? "opacity-100" : "opacity-0")}
+            >
+              <p className="mb-2.5 text-xs uppercase tracking-[0.2em] text-dim">{s.time}</p>
+              <p className="text-[19px] leading-[1.45] text-fog">{s.text}</p>
+            </div>
+          ))}
         </div>
       </div>
     </section>
-  );
-}
-
-function SubtitleFrame({
-  progress,
-  input,
-  output,
-  time,
-  text
-}: {
-  progress: MotionValue<number>;
-  input: number[];
-  output: number[];
-  time: string;
-  text: string;
-}) {
-  const opacity = useTransform(progress, input, output);
-  return (
-    <motion.div style={{ opacity }} className="absolute inset-0">
-      <p className="mb-2.5 text-xs uppercase tracking-[0.2em] text-dim">{time}</p>
-      <p className="text-[19px] leading-[1.45] text-fog">{text}</p>
-    </motion.div>
   );
 }
 
@@ -287,5 +267,5 @@ function DemoStatic() {
 export default function DemoPinned() {
   const reduceMotion = usePrefersReducedMotion();
   if (reduceMotion) return <DemoStatic />;
-  return <DemoScrub />;
+  return <DemoAutoplay />;
 }

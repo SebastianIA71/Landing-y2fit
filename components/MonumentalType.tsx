@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { useEffect, useRef } from "react";
+import { animate, motion, useInView, useMotionValue } from "framer-motion";
 import { usePrefersReducedMotion } from "@/lib/usePrefersReducedMotion";
 
 function Copy() {
@@ -17,36 +17,29 @@ function Copy() {
   );
 }
 
-function MonumentalScrub() {
-  const pinRef = useRef<HTMLDivElement>(null);
+function MonumentalAutoplay() {
+  const sectionRef = useRef<HTMLDivElement>(null);
   const wordRef = useRef<HTMLDivElement>(null);
-  const [overflow, setOverflow] = useState(0);
+  const inView = useInView(sectionRef, { amount: 0.5, once: true });
+  const x = useMotionValue(0);
 
   useEffect(() => {
-    function measure() {
-      if (!wordRef.current) return;
-      setOverflow(Math.max(0, wordRef.current.scrollWidth - window.innerWidth * 0.8));
-    }
-    measure();
-    window.addEventListener("resize", measure);
-    return () => window.removeEventListener("resize", measure);
-  }, []);
-
-  const { scrollYProgress } = useScroll({ target: pinRef, offset: ["start start", "end end"] });
-  const x = useTransform(scrollYProgress, [0, 1], [0, -overflow]);
+    if (!inView || !wordRef.current) return;
+    const overflow = Math.max(0, wordRef.current.scrollWidth - window.innerWidth * 0.8);
+    const controls = animate(x, -overflow, { duration: 3.2, ease: "easeInOut" });
+    return () => controls.stop();
+  }, [inView, x]);
 
   return (
-    <section ref={pinRef} className="relative h-[260vh] bg-ink">
-      <div className="sticky top-0 flex h-screen items-center overflow-hidden">
-        <motion.div
-          ref={wordRef}
-          style={{ x }}
-          className="whitespace-nowrap pl-[10vw] font-display leading-[0.78] text-card [-webkit-text-stroke:1px_#23262c] will-change-transform"
-        >
-          <span style={{ fontSize: "120vh" }}>Y2FIT</span>
-        </motion.div>
-        <Copy />
-      </div>
+    <section ref={sectionRef} className="relative flex min-h-screen items-center overflow-hidden bg-ink">
+      <motion.div
+        ref={wordRef}
+        style={{ x }}
+        className="whitespace-nowrap pl-[10vw] font-display leading-[0.78] text-card [-webkit-text-stroke:1px_#23262c] will-change-transform"
+      >
+        <span style={{ fontSize: "120vh" }}>Y2FIT</span>
+      </motion.div>
+      <Copy />
     </section>
   );
 }
@@ -70,5 +63,5 @@ function MonumentalStatic() {
 export default function MonumentalType() {
   const reduceMotion = usePrefersReducedMotion();
   if (reduceMotion) return <MonumentalStatic />;
-  return <MonumentalScrub />;
+  return <MonumentalAutoplay />;
 }
