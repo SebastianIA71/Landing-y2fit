@@ -4,7 +4,7 @@
 
 :root {
   color-scheme: dark;
-  background: #070809;
+  background: #0a0b0c;
 }
 
 * {
@@ -17,13 +17,10 @@ html {
 
 body {
   min-height: 100vh;
-  background:
-    linear-gradient(rgba(200, 248, 46, 0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(200, 248, 46, 0.04) 1px, transparent 1px),
-    #070809;
-  background-size: 48px 48px;
-  color: #f4f7ef;
+  background: #0a0b0c;
+  color: #f3f5f0;
   font-family: var(--font-sans), system-ui, sans-serif;
+  overflow-x: clip;
 }
 
 body {
@@ -36,18 +33,17 @@ a {
 }
 
 ::selection {
-  background: rgba(200, 248, 46, 0.9);
-  color: #070809;
+  background: #c8f82e;
+  color: #0a0b0c;
 }
 
-.noise {
+.grain {
   position: fixed;
-  inset: 0;
+  inset: -4%;
+  z-index: 90;
   pointer-events: none;
-  z-index: 0;
-  opacity: 0.18;
-  background-image: url("/assets/noise.svg");
-  mix-blend-mode: soft-light;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/></filter><rect width='180' height='180' filter='url(%23n)' opacity='0.7'/></svg>");
 }
 
 .text-balance {
@@ -56,16 +52,6 @@ a {
 
 summary::-webkit-details-marker {
   display: none;
-}
-
-details summary::after {
-  content: "+";
-  float: right;
-  color: #c8f82e;
-}
-
-details[open] summary::after {
-  content: "-";
 }
 
 @media (prefers-reduced-motion: reduce) {

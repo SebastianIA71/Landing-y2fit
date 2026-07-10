@@ -1,41 +1,76 @@
+import Image from "next/image";
 import Reveal from "@/components/Reveal";
-import { HeroPhone } from "@/components/PhoneMockups";
+import { PhoneFrame } from "@/components/PhoneFrame";
+import HomeScreen from "@/components/screens/HomeScreen";
 
 export default function Hero() {
   return (
-    <section id="inicio" className="relative min-h-screen overflow-hidden px-5 pb-12 pt-28 lg:px-8">
-      <div className="absolute inset-0 bg-[url('/landing/images/athlete-hero.jpg')] bg-cover bg-[65%_center] opacity-35" />
-      <div className="absolute inset-0 bg-[linear-gradient(90deg,#070809_0%,rgba(7,8,9,.92)_38%,rgba(7,8,9,.34)_100%)]" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_78%_36%,rgba(200,248,46,.15),transparent_34%)]" />
-      <div className="relative mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-[1fr_.9fr]">
+    <section className="relative flex min-h-screen items-end overflow-hidden">
+      <div className="absolute inset-0">
+        <Image
+          src="/landing/images/hero-vestuario-bn.jpg"
+          alt="Atleta joven en vestuario vacío, botas de tacos a un lado y zapatillas de gym al otro"
+          fill
+          priority
+          className="object-cover object-[center_30%] grayscale"
+        />
+      </div>
+      <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(10,11,12,0.35)_0%,rgba(10,11,12,0.1)_40%,rgba(10,11,12,0.92)_82%,#0a0b0c_100%)]" />
+
+      <div className="absolute bottom-[-12%] right-[5%] z-[2] hidden h-[74vh] w-[300px] rotate-[-7deg] drop-shadow-[0_40px_80px_rgba(0,0,0,0.7)] md:block">
+        <PhoneFrame className="h-full w-full">
+          <HomeScreen />
+        </PhoneFrame>
+      </div>
+
+      <div className="relative z-[3] mx-auto w-full max-w-[1400px] px-6 pb-[72px] md:px-8">
         <Reveal>
-          <div className="max-w-3xl">
-            <p className="mb-5 inline-flex rounded-full border border-volt/40 bg-volt/10 px-4 py-2 text-xs font-bold uppercase tracking-[.18em] text-volt">
-              Tu segunda vida deportiva
-            </p>
-            <h1 className="font-display text-[4rem] font-black uppercase leading-[.86] tracking-tight text-fog sm:text-[5.8rem] lg:text-[6.8rem]">
-              The game ended.
-              <span className="block text-volt">Your journey didn&apos;t.</span>
-            </h1>
-            <p className="mt-7 max-w-2xl text-lg leading-8 text-[#c8cec3]">
-              Y2FIT es el entrenador inteligente que te acompana en tu nueva vida en el gimnasio: plan, progreso, IA, retos y comunidad desde el primer dia.
-            </p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <a href="#descarga" className="rounded-full bg-volt px-7 py-4 text-sm font-black uppercase text-ink transition hover:bg-acid">
-                Empieza gratis
-              </a>
-              <a href="#como-funciona" className="rounded-full border border-white/20 px-7 py-4 text-sm font-black uppercase text-fog transition hover:border-volt/60">
-                Ver como funciona
-              </a>
-            </div>
-            <p className="mt-5 text-sm text-muted">Gratis - Sin tarjeta - iOS y Android</p>
+          <p className="mb-5 text-xs uppercase tracking-[0.24em] text-dim">
+            Temporada 1 · Disponible en iOS y Android
+          </p>
+        </Reveal>
+        <Reveal delay={0.05}>
+          <h1 className="max-w-[12ch] text-balance font-display text-[clamp(52px,7.6vw,116px)] uppercase leading-[0.94] tracking-[-0.01em] text-fog">
+            Tu carrera no terminó.
+            <br />
+            <span className="text-volt">Cambió de escenario.</span>
+          </h1>
+        </Reveal>
+        <Reveal delay={0.1}>
+          <p className="my-6 max-w-[44ch] text-[clamp(16px,1.4vw,20px)] leading-[1.55] text-muted">
+            La app que te entrena cuando dejas el deporte de equipo y empiezas en el gimnasio. Tu
+            plan por temporadas, un coach IA y cada sesión guiada ejercicio a ejercicio.
+          </p>
+        </Reveal>
+        <Reveal delay={0.15}>
+          <div className="mb-9 flex items-center gap-3.5 font-display text-xs uppercase tracking-[0.14em] text-volt">
+            <span>Plan</span>
+            <span className="text-border2">·</span>
+            <span>Coach IA</span>
+            <span className="text-border2">·</span>
+            <span>Progreso</span>
           </div>
         </Reveal>
-        <Reveal delay={0.1} className="relative flex justify-center lg:justify-end">
-          <div className="absolute bottom-6 right-4 hidden h-64 w-64 rounded-full bg-volt/10 blur-3xl lg:block" />
-          <HeroPhone />
+        <Reveal delay={0.2}>
+          <div className="flex flex-wrap items-center gap-[18px]">
+            <a
+              href="#finale"
+              className="inline-block rounded-full bg-volt px-[34px] py-[18px] font-display text-[15px] uppercase tracking-[0.04em] text-ink transition hover:-translate-y-0.5 hover:shadow-[0_14px_40px_rgba(200,248,46,0.3)]"
+            >
+              Empieza tu temporada 1
+            </a>
+            <span className="text-sm text-dim">Gratis · iOS y Android</span>
+          </div>
+        </Reveal>
+
+        <Reveal delay={0.25} className="mx-auto mt-9 h-[300px] w-[210px] md:hidden">
+          <PhoneFrame className="h-full w-full border border-border shadow-phone">
+            <HomeScreen />
+          </PhoneFrame>
         </Reveal>
       </div>
+
+      <div id="hero-end" className="absolute bottom-0 h-px w-full" />
     </section>
   );
 }

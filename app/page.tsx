@@ -1,39 +1,48 @@
-import Comparison from "@/components/Comparison";
-import FAQ from "@/components/FAQ";
-import FeatureGrid from "@/components/FeatureGrid";
-import FinalCTA, { MidCTA } from "@/components/FinalCTA";
+import Bench from "@/components/Bench";
+import CoachChat from "@/components/CoachChat";
+import CtaBand from "@/components/CtaBand";
+import DemoPinned from "@/components/DemoPinned";
+import FanShowcase from "@/components/FanShowcase";
+import Finale from "@/components/Finale";
 import Footer from "@/components/Footer";
-import Header from "@/components/Header";
+import GrainOverlay from "@/components/GrainOverlay";
 import Hero from "@/components/Hero";
-import ProductShowcase from "@/components/ProductShowcase";
-import ScrollDemo from "@/components/ScrollDemo";
-import StorySection from "@/components/StorySection";
-import Testimonials from "@/components/Testimonials";
-import TrustBar from "@/components/TrustBar";
+import Marquee from "@/components/Marquee";
+import MonumentalType from "@/components/MonumentalType";
+import Nav from "@/components/Nav";
+import PlanSection from "@/components/PlanSection";
+import PreviouslyOn from "@/components/PreviouslyOn";
+import StickyCta from "@/components/StickyCta";
+import Stories from "@/components/Stories";
+import StreakSection from "@/components/StreakSection";
+import TheTwist from "@/components/TheTwist";
+
+const MARQUEE_1 = ["Temporada 1", "Episodio 12", "Racha 23 días", "Press banca +12 kg", "Coach Y en línea"];
+const MARQUEE_2 = ["Fichajes de esta temporada", "Álvaro · Extremo", "Marta · Base", "Iker · Portero"];
 
 export default function Home() {
   return (
     <main className="relative isolate overflow-hidden bg-ink text-fog">
-      <div className="noise" />
-      <Header />
+      <GrainOverlay />
+      <Nav />
+      <StickyCta />
+
       <Hero />
-      <TrustBar />
-      <StorySection />
-      <ProductShowcase />
-      <FeatureGrid />
-      <ScrollDemo />
-      <Testimonials />
-      <Comparison />
-      <MidCTA />
-      <FAQ />
-      <FinalCTA />
+      <PreviouslyOn />
+      <TheTwist />
+      <Marquee items={MARQUEE_1} />
+      <PlanSection />
+      <DemoPinned />
+      <CtaBand text="Así, cada día de entrenamiento." />
+      <FanShowcase />
+      <MonumentalType />
+      <CoachChat />
+      <StreakSection />
+      <Marquee items={MARQUEE_2} reverse />
+      <Stories />
+      <Bench />
+      <Finale />
       <Footer />
-      <a
-        href="#descarga"
-        className="fixed bottom-4 left-4 right-4 z-40 rounded-full bg-volt px-5 py-4 text-center text-sm font-black uppercase text-ink shadow-neon md:hidden"
-      >
-        Empieza gratis
-      </a>
     </main>
   );
 }

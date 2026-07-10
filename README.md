@@ -64,26 +64,44 @@ curl -X POST http://localhost:3000/api/waitlist \
   -d "{\"email\":\"test@y2fit.app\",\"name\":\"Test\",\"sportOrigin\":\"futbol\",\"goal\":\"empezar-gym\"}"
 ```
 
+## Diseno: "Segunda Temporada"
+
+La landing recrea el prototipo de handoff "Y2FIT Landing — Segunda Temporada v2". Las pantallas de
+la app (home, misiones, progreso, episodio, coach IA) estan recreadas como componentes React en
+`components/screens/`, no como capturas o iframes, para mantener un unico set de componentes
+reutilizado en el hero, el plan, la demo pinneada y el abanico de ecosistema.
+
+Mecanicas de motion (ver el handoff `MOTION-SPEC.md` para la especificacion original):
+
+- Reveals/slides: `components/Reveal.tsx` (prop `direction`).
+- Scrub pinned de la demo de sesion: `components/DemoPinned.tsx` (Framer Motion `useScroll`/`useTransform`).
+- Tipo monumental Y2FIT: `components/MonumentalType.tsx`.
+- Fondos vivos (breathe) y grano: `tailwind.config.ts` + `components/GrainOverlay.tsx`.
+- Marquee cinetico: `components/Marquee.tsx`.
+
+Todas las mecanicas dependientes de scroll (`DemoPinned`, `MonumentalType`, `StreakSection`) usan
+`lib/usePrefersReducedMotion.ts` (no el hook de framer-motion) para evitar mismatches de hidratacion
+entre servidor y cliente, y renderizan una alternativa estatica bajo `prefers-reduced-motion: reduce`.
+
 ## Assets usados
 
-Todos los assets estan en `public/assets` y son locales:
+Todos los assets estan en `public/landing/images` y `public/assets` y son locales:
 
-- `hero-phone.svg`: mockup movil principal.
-- `progress-panel.svg`: panel visual de progreso.
-- `app-screens.svg`: capturas/mockups de la app.
+- `hero-vestuario-bn.jpg`, `historia-alvaro.jpg`, `historia-marta.jpg`, `historia-iker.jpg`,
+  `press-banca.jpg`, `gym-pullup.jpg`: fotografia del handoff (`ai/`, `app/assets/exercises/`,
+  `screens/img/`).
 - `og-y2fit.svg`: imagen Open Graph.
-- `noise.svg`: textura ligera de fondo.
-- `favicon.svg`: favicon local.
-
-Los mockups son placeholders vectoriales creados para la landing. Deben sustituirse por capturas reales de la app cuando existan pantallas definitivas de producto.
+- `noise.svg`, `favicon.svg`: sin usar por la landing actual (quedan por si se reutilizan).
 
 ## Magnific
 
-No se ha usado Magnific ni se han gastado creditos. Alternativa aplicada: crear assets SVG locales inspirados en la identidad visual aportada.
+No se ha usado Magnific ni se han gastado creditos. Se reutilizo la fotografia incluida en el
+paquete de handoff.
 
 ## Pendientes reales antes de publicar
 
 - Sustituir los enlaces `#` de App Store y Google Play por URLs reales.
-- Reemplazar testimonios placeholder por citas reales o dejarlos ocultos hasta validacion.
+- Reemplazar testimonios placeholder (Alvaro/Marta/Iker) por citas reales o dejarlos ocultos hasta validacion.
 - Cambiar `metadataBase` en `app/layout.tsx` por el dominio final.
 - Configurar las variables de Supabase en Vercel antes de activar la waitlist real.
+- Conectar el chat demo de "Pregúntale a Y" (`components/CoachChat.tsx`) a la IA real en produccion.
